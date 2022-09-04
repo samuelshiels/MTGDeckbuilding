@@ -75,9 +75,9 @@ def getVariations(deck):
         f.write(output)
 
 config = {
-    'output':'output_delver',
-    'outputType':'MKMImport',
+    'output':'output.html',
+    'outputType':'VariantsHTML',
     'input':'decks/decklisttest',
     'inputType':'archideckt'
 }
-print(mtgDelver.execute(config))
+mtgDelver.execute(config)

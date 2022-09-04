@@ -32,6 +32,8 @@ def init_argparse() -> argparse.ArgumentParser:
 def output(config):
     returnValue = ''
     match config['outputType']:
+        case 'VariantsHTML':
+            returnValue = config['deck'].printVariantsHTML()
         case 'MKMImport':
             returnValue = config['deck'].printMKMImport()
         case _:

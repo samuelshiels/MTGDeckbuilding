@@ -18,8 +18,8 @@ def runRest(e, p, o, c):
     restObj['payload'] = {}
     '''
 
-    config['output'] = o + '.json'
-    config['cache'] = cache + c
+    config['output'] = f'{o}.json'
+    config['cache'] = f'{cache}{c}'
     config['time'] = 21600
     config['sleep'] = 200
     config['rest'] = restObj
@@ -46,5 +46,16 @@ def getScryfallObj(cardName):
         lh.encodeMD5(cardName),
         'cache/cards'
     )
-    lh.getCacheDirectory()
+    return json.loads(response)
+
+def getVariations(oracleId):
+    response = runRest(
+        'https://api.scryfall.com/cards/search',
+        {
+            'q':f'oracle_id={oracleId}',
+            'unique':'prints'
+        },
+        oracleId,
+        'cache/search'
+    )
     return json.loads(response)

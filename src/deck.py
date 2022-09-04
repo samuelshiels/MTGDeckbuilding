@@ -1,3 +1,5 @@
+import copy
+
 class Deck:
 
     _defaults = {
@@ -21,4 +23,15 @@ class Deck:
         for c in self.cards:
             returnValue.append(c.printMKMImport())
         return '\n'.join(returnValue)
+    
+    def printVariantsHTML(self):
+        header = "<head></head>"
+        cards = []
+        for c in self.cards:
+            cards.append(copy.deepcopy(c.printVariantsHTML()))
+        cardHTML = ''.join(cards)
+        content = f'<table><caption>{self.name}</caption><tr><th>Name</th><th>Pics</th></tr>{cardHTML}</table>'
+        body = f"<body>{content}</body>"
+        returnValue = f"<html>{header}{body}</html>"
+        return returnValue
     
