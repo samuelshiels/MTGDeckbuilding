@@ -21,10 +21,10 @@ def loadDelverDeck(deckName):
     pass
 
 config = {
-    'output':'output.html',
-    'outputType':'VariantsHTML',
+    'output':'output.txt',
+    'outputType':'MKMImport',
     'input':'decks/Prossh.txt',
-    'inputType':'archideckt'
+    'inputType':'delverDefault'
 }
 response = mtgDelver.execute(config)
 print(response)

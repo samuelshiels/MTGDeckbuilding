@@ -20,14 +20,28 @@ def convertType(array):
     return [int(array[0]), str(array[1])]
 
 def formatX(str):
-    return convertType(str.split('x ',2))
+    return convertType(str.split('x ',1))
 
-def importSimple():
+def importSimple(rawArray):
     pass
 
-def importArchideckt():
-    #split 'x\s'
-    pass
+def importArchideckt(rawArray):
+    return formatDeckX(rawArray)
 
-def importDelverDeck():
+def removeQuotes(array):
+    zero = int(array[0][1:])
+    one = str(array[1])
+    return [zero, one]
+
+def splitCSV(str):
+    result = str.split('","')
+    return removeQuotes([result[0],result[1]])
+
+def importDelverDeck(rawArray = [], type='default'):
+    if 'Quantity,Name,' in rawArray[0]:
+        rawArray.pop(0)
+        deckArray = list(map(splitCSV, rawArray))
+        return deckArray
+    else:
+        return []
     pass

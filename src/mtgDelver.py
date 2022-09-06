@@ -47,8 +47,14 @@ def output(config):
 '''
 def createDeck(config):
     match config['inputType']:
+        case 'delverDefault':
+            config['formattedDeck'] = dli.importDelverDeck(config['fileData'], 'default')
+            print(config['formattedDeck'])
+            #exit()
+            config['cards'] = dli.createCards(config['formattedDeck'])
+            config['deck'] = dli.createDeck('test', config['cards'])
         case 'archideckt':
-            config['formattedDeck'] = dli.formatDeckX(config['fileData'])
+            config['formattedDeck'] = dli.importArchideckt(config['fileData'])
             config['cards'] = dli.createCards(config['formattedDeck'])
             config['deck'] = dli.createDeck('test', config['cards'])
         case _:
