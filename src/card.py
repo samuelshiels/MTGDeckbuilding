@@ -28,13 +28,22 @@ class Card:
         variations = []
         for item in self.variationsObj:
             variationObj = {
-                'fileName':item['image_uris']['normal'].split('/')[-1],
                 'border':'',
                 'foil':'',
                 'location':cache,
-                'imageUri': item['image_uris']['normal'],
-                'uri':item['purchase_uris']['cardmarket']
             }
+            if 'image_uris' not in item:
+                variationObj['fileName'] = item['card_faces'][0]['image_uris']['normal'].split('/')[-1]
+                variationObj['imageUri'] = item['card_faces'][0]['image_uris']['normal']
+                pass
+            else:
+                variationObj['fileName'] = item['image_uris']['normal'].split('/')[-1]
+                variationObj['imageUri'] = item['image_uris']['normal']
+                pass
+            if 'purchase_uris' in item:
+                variationObj['uri'] = item['purchase_uris']['cardmarket']
+            else:
+                variationObj['uri'] = '404'
             #print(variationObj['location'])
             #print(variationObj['fileName'])
             lh.retrieveFile(variationObj['imageUri'],variationObj['location'],variationObj['fileName'],10000)

@@ -63,6 +63,7 @@ def createDeck(config):
 '''
 def loadDeck(config):
     config['fileData'] = lh.readFile(config['input'])
+    config['fileData'] = [x for x in config['fileData'] if x]
     return config
 
 '''
@@ -70,7 +71,14 @@ def loadDeck(config):
 
 '''
 def __validateConfig(config):
-    
+    if 'input' not in config or 'input' == '':
+        return False
+    if 'output' not in config or 'output' == '':
+        config['output'] = 'output'
+    if 'inputType' not in config:
+        config['inputType'] = ''
+    if 'outputType' not in config:
+        config['outputType'] = ''
     return config
 
 '''

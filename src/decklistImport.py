@@ -20,7 +20,7 @@ def convertType(array):
     return [int(array[0]), str(array[1])]
 
 def formatX(str):
-    return convertType(str.split('x '))
+    return convertType(str.split('x ',2))
 
 def importSimple():
     pass
