@@ -15,13 +15,13 @@ def init_argparse() -> argparse.ArgumentParser:
     )
 
     parser.add_argument('-o','--output',nargs=1,default=False,
-                    help='file to store result in - defaults to none and returns in std out')
+                    help='File name to store result in - if not provided will return the value as part of the command')
     parser.add_argument('-i','--input',nargs=1,default=False,
-                    help='file to input')
+                    help='File name to input - can be a relative or absolute file path')
     parser.add_argument('-ot','--output_type',nargs=1,default=False,
                     help='Type of output data to format')
     parser.add_argument('-it','--input_type',nargs=1,default=False,
-                    help='type of input you want to parse')
+                    help='Type of input you want to parse')
     args = parser.parse_args()
     return args
 
@@ -73,8 +73,6 @@ def loadDeck(config):
 def __validateConfig(config):
     if 'input' not in config or 'input' == '':
         return False
-    if 'output' not in config or 'output' == '':
-        config['output'] = 'output'
     if 'inputType' not in config:
         config['inputType'] = ''
     if 'outputType' not in config:
