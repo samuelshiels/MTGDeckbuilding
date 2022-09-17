@@ -56,7 +56,7 @@ def createDeck(config):
             config['cards'] = dli.createCards(config['formattedDeck'])
             config['deck'] = dli.createDeck('test', config['cards'])
         case _:
-            config['formattedDeck'] = dli.formatDeckX(config['fileData'])
+            config['formattedDeck'] = dli.importSimple(config['fileData'])
             config['cards'] = dli.createCards(config['formattedDeck'])
             config['deck'] = dli.createDeck('test', config['cards'])
     return config

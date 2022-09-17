@@ -5,10 +5,10 @@ import rest as r
 import mtgDelver
 
 config = {
-    'output':'output.txt',
-    'outputType':'MKMImport',
-    'input':'decks/Prossh.txt',
-    'inputType':'delverDefault'
+    'output':'output.html',
+    'outputType':'VariantsHTML',
+    'input':'decks/Ardenn.txt',
+    'inputType':'archideckt'
 }
 response = mtgDelver.execute(config)
 print(response)

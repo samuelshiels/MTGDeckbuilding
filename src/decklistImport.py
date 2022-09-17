@@ -24,10 +24,10 @@ def formatX(str):
     return convertType(str.split('x ',1))
 
 def importSimple(rawArray):
-    pass
+    return makeUnique(formatDeckX(rawArray))
 
 def importArchideckt(rawArray):
-    return formatDeckX(rawArray)
+    return makeUnique(formatDeckX(rawArray))
 
 def removeQuotes(array):
     zero = int(array[0])
@@ -38,6 +38,15 @@ def splitCSV(str, n, q):
     result = str[1:-1].split('","')
     return removeQuotes([result[q],result[n]])
 
+def makeUnique(deckArray):
+    result = []
+    done = set()
+    for x in deckArray:
+        if x[1] not in done:
+            result.append(x)
+            done.add(x[1])
+    return result
+
 def importDelverDeck(rawArray = [], type='default'):
     if 'Quantity' in rawArray[0] and 'Name' in rawArray[0]:
         positions = rawArray[0].split(',')
@@ -45,8 +54,7 @@ def importDelverDeck(rawArray = [], type='default'):
         quantityLoc = positions.index('Quantity')
         rawArray.pop(0)
         deckArray = [splitCSV(p, nameLoc, quantityLoc) for p in rawArray]
-        #deckArray = list(map(splitCSV, rawArray))
-        return deckArray
+        return makeUnique(deckArray)
     else:
         return []
     pass
