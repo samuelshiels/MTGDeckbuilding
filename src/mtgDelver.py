@@ -34,7 +34,7 @@ def output(config):
     match config['outputType']:
         case 'VariantsHTML':
             returnValue = config['deck'].printVariantsHTML()
-        case 'MKMImport':
+        case 'MKM':
             returnValue = config['deck'].printMKMImport()
         case _:
             returnValue = config['deck'].print()
@@ -47,7 +47,7 @@ def output(config):
 '''
 def createDeck(config):
     match config['inputType']:
-        case 'delverDefault':
+        case 'delver':
             config['formattedDeck'] = dli.importDelverDeck(config['fileData'], 'default')
             config['cards'] = dli.createCards(config['formattedDeck'])
             config['deck'] = dli.createDeck('test', config['cards'])

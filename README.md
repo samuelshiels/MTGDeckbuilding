@@ -25,11 +25,15 @@ python3 mtgDelver.py --output output.html --outputType VariantsHTML --input deck
 <h2>Import Features</h2>
 
 * Archideckt (default 1x CardName)
-* Delver (default csv export)
+** archideckt
+* MTG Delver (default csv export)
+** delver
 
 <h2>Export Features</h2>
 
 * CardMarket Import
+** MKM
+
 
 <h2>Output Features</h2>
 
