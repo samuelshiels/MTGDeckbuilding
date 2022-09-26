@@ -1,5 +1,5 @@
 import copy
-
+from card import Card as c
 class Deck:
 
     _defaults = {
@@ -11,6 +11,24 @@ class Deck:
         self.__dict__.update(self._defaults)
         self.__dict__.update(kwargs)
     
+    '''
+    
+    
+    '''
+    def performAddRemove(self, addRemoveList):
+        #
+        for i in addRemoveList['remove']:
+            #
+            for card in self.cards:
+                if card.name == i:
+                    self.cards.remove(card)
+                pass
+            pass
+        for i in addRemoveList['add']:
+            self.cards.append(c(name = i, quantity = 1))
+            pass
+        return
+
     def print(self):
         returnValue = []
         returnValue.append(self.name)

@@ -22,6 +22,8 @@ def init_argparse() -> argparse.ArgumentParser:
                     help='Type of output data to format')
     parser.add_argument('-it','--input_type',nargs=1,default=False,
                     help='Type of input you want to parse')
+    parser.add_argument('-ar','--add_remove',nargs=1,default=False,
+                    help='File of list of cards that will be added and removed to the deck before the output')
     args = parser.parse_args()
     return args
 
@@ -70,6 +72,28 @@ def loadDeck(config):
     config['fileData'] = [x for x in config['fileData'] if x]
     return config
 
+def loadAddRemove(config):
+    config['addRemoveData'] = lh.readFile(config['addRemove'])
+    config['addRemoveData'] = [x for x in config['addRemoveData'] if x]
+    addRemoveData = {
+        'add': [],
+        'remove': []
+    }
+    mode = None
+    for i in config['addRemoveData']:
+        if i.startswith('Add'):
+            mode = 'add'
+            continue
+        if i.startswith('Remove'):
+            mode = 'remove'
+            continue
+        if mode == 'add':
+            addRemoveData['add'].append(dli.formatX(i)[1])
+        else:
+            addRemoveData['remove'].append(dli.formatX(i)[1])
+    config['addRemoveData'] = addRemoveData
+    return config
+
 '''
 001
 
@@ -81,6 +105,18 @@ def __validateConfig(config):
         config['inputType'] = ''
     if 'outputType' not in config:
         config['outputType'] = ''
+    if 'addRemove' not in config:
+        config['addRemove'] = ''
+    return config
+
+
+'''
+
+
+'''
+def commitAddRemove(config):
+    print(config['addRemoveData'])
+    config['deck'].performAddRemove(config['addRemoveData'])
     return config
 
 '''
@@ -94,6 +130,9 @@ def execute(config):
     returnValue = False
     config = loadDeck(config)
     config = createDeck(config)
+    if config['addRemove'] != '':
+        config = loadAddRemove(config)
+        config = commitAddRemove(config)
     returnValue = output(config)
     return returnValue
 
@@ -107,7 +146,8 @@ def main():
         'input':args['input'][0],
         'inputType':args['input_type'][0],
         'output':args['output'][0],
-        'outputType':args['output_type'][0]
+        'outputType':args['output_type'][0],
+        'addRemove':args['add_remove'][0]
     }
     return execute(config)
 
