@@ -119,6 +119,12 @@ def commitAddRemove(config):
     config['deck'].performAddRemove(config['addRemoveData'])
     return config
 
+def outputFeatures():
+    inputs = ['delver','archideckt']
+    outputs = ['VariantsHTML','MKM']
+    other = ['addRemove']
+    print(inputs, outputs, other)
+
 '''
 
 

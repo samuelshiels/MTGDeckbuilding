@@ -25,6 +25,8 @@ def runRest(e, p, o, c):
     config['rest'] = restObj
     return getRestData.execute(config)
 
+def getFile(uri,location,fileName,age=10000):
+	getRestData.retrieveFile(uri, location, fileName, age)
 
 def getOracleId(cardName):
     response = runRest(
